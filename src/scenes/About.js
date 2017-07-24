@@ -5,7 +5,6 @@ import { typography } from 'react-native-material-design-styles'
 import Device from 'react-native-device-info'
 import { getFreeVersion } from '../store/selectors'
 import { createNoAdsPurchased } from '../store/settings/actions'
-import { purchaseNoAds } from '../services/billing'
 import { Text } from '../components'
 import { packageName, appName, mail } from '../constants'
 import { primaryColor } from '../styling'
@@ -36,15 +35,9 @@ class About extends Component {
   }
 
   onRate = () => {
-    Linking.openURL(`market://details?id=${packageName}`).catch(() => {
-      // try to open it in browser
-      Linking.openURL(`http://play.google.com/store/apps/details?id=${packageName}`).catch(() => {
-      })
-    })
   }
 
   async onBuy() {
-    const purchased = await purchaseNoAds()
     if (purchased) this.props.dispatchNoAdsPurchased()  // eslint-disable-line
   }
 

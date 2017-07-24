@@ -1,5 +1,3 @@
-import secretConstant from '../../secrets'
-
 export function getSettingsState(state) {
   const { playRandom, playCustomVideoId, wifiOnly, volume, snoozeMinutes } = state
   return {
@@ -24,6 +22,6 @@ export function getVolume(state) {
 }
 
 export function getFreeVersion(state) {
-  return state.freeVersion !== secretConstant
+  return false
 }
 

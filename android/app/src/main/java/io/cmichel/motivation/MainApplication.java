@@ -18,8 +18,8 @@ import java.util.List;
 
 import io.cmichel.motivation.SoundManagerPackage;
 import io.cmichel.appLauncher.LauncherPackage;  // add this for react-native-app-launcher
-import com.sbugert.rnadmob.RNAdMobPackage;
 import com.github.yamill.orientation.OrientationPackage;  // react-native-orientation
+import com.mihir.react.tts.*;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -38,7 +38,7 @@ public class MainApplication extends Application implements ReactApplication {
           new VectorIconsPackage(),
           new SoundManagerPackage(),
           new LauncherPackage(),
-          new RNAdMobPackage(),
+          new RCTTextToSpeechModule(),
           new OrientationPackage()
       );
     }

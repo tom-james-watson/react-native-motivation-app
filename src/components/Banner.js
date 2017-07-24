@@ -1,10 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
-import { AdMobBanner, AdMobInterstitial } from 'react-native-admob'
 import { adUnitID, adSnoozeInterstitial } from '../constants'
 import { adBannerHeight } from '../styling'
-
-AdMobInterstitial.setAdUnitID(adSnoozeInterstitial)
 
 const styles = {
   banner: {
@@ -32,12 +29,6 @@ export default class Banner extends Component {
     }
     return (
       <View style={[styles.banner, style]}>
-        <AdMobBanner
-          bannerSize="smartBannerPortrait"
-          adUnitID={adUnitID}
-          // testDeviceID='EMULATOR' // TEST_EMULATOR on Android
-          didFailToReceiveAdWithError={this.bannerError}
-        />
       </View>
     )
   }

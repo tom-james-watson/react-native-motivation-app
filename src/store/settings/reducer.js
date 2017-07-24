@@ -1,14 +1,13 @@
 import Immutable from 'seamless-immutable'
 import { AsyncStorage, NativeModules } from 'react-native'
 import AppLauncher from 'react-native-app-launcher'
-import secretConstant from '../../secrets'
 import { clamp } from '../../utils'
 
 export const defaultState = Immutable({
   playRandom: true,
   playCustomVideoId: 'hbkZrOU1Zag',
   wifiOnly: true,
-  volume: 30,
+  volume: 85,
   snoozeMinutes: 15,
   freeVersion: true,
 })
@@ -58,12 +57,12 @@ const reducer = (state = defaultState, action) => {
       }, { deep: true }))
     }
     case 'VIDEO_PLAYER_LOAD_END': {
-      NativeModules.SoundManager.setMusicVolume(state.volume)
+      // NativeModules.SoundManager.setMusicVolume(state.volume)
       return state
     }
     case 'PURCHASED_NO_ADS': {
       return saveAndReturnState(state.merge({
-        freeVersion: secretConstant,
+        freeVersion: false
       }, { deep: true }))
     }
     default:

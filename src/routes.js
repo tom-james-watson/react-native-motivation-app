@@ -14,14 +14,6 @@ const routes = {
     },
     Component: Alarm,
   },
-  video: {
-    initialRoute: false,
-    title: 'Video',
-    iconProps: {
-      name: 'video-library',
-    },
-    Component: Video,
-  },
   settings: {
     initialRoute: false,
     title: 'Settings',
@@ -29,15 +21,6 @@ const routes = {
       name: 'settings',
     },
     Component: Settings,
-  },
-  about: {
-    initialRoute: false,
-    title: 'About',
-    iconProps: {
-      name: 'info',
-      type: 'octicon',
-    },
-    Component: About,
   },
 }
 

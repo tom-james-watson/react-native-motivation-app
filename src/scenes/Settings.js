@@ -96,29 +96,6 @@ class Settings extends Component {
     return (
       <ScrollView showVerticalScrollbar>
         <Text style={[{ color: primaryColor, alignSelf: 'center' }, typography.paperFontTitle]}>Settings</Text>
-        <CheckBox
-          title="Only stream when connected to Wi-Fi"
-          containerStyle={{ borderWidth: 0, backgroundColor: 'transparent', marginHorizontal: 0 }}
-          textStyle={textStyle}
-          checked={this.props.wifiOnly}
-          iconLeft
-          checkedColor={primaryColor}
-          onPress={this.onWiFiOnlyPress}
-        />
-        <View style={styles.horizontalContainer}>
-          <Text>
-            {`Video Volume: ${padLeft('\u2000', 2, this.state.volume)}%`}
-          </Text>
-          <Slider
-            minimumValue={0}
-            maximumValue={100}
-            step={1}
-            value={this.props.volume}
-            onSlidingComplete={this.onVolumeSubmit}
-            onValueChange={value => this.onVolumeChange(value)}
-            style={styles.slider}
-          />
-        </View>
         <TextInputRow
           textBefore="Snooze Length:"
           textAfter="minutes"
@@ -131,27 +108,6 @@ class Settings extends Component {
             defaultValue: typeof snoozeMinutes !== 'undefined' ? snoozeMinutes.toString() : '',
           }}
         />
-        <CheckBox
-          title="Play custom YouTube video"
-          containerStyle={{ borderWidth: 0, backgroundColor: 'transparent', marginHorizontal: 0 }}
-          textStyle={textStyle}
-          checked={this.props.playCustom}
-          iconLeft
-          checkedColor={primaryColor}
-          onPress={this.onCustomVideoPress}
-        />
-        {this.props.playCustom &&
-        <TextInputRow
-          textBefore="YouTube Video-ID:"
-          onSubmit={this.onYouTubeSubmit}
-          inputStyle={[styles.textInput, styles.customVideoInput]}
-          inputProps={{
-            placeholder: 'Video-ID',
-            maxLength: 15,
-            defaultValue: typeof playCustomVideoId !== 'undefined' ? playCustomVideoId : '',
-          }}
-        />
-        }
       </ScrollView>
     )
   }

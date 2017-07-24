@@ -1,7 +1,6 @@
 import { NativeModules } from 'react-native'
 import AppLauncher from 'react-native-app-launcher'
 import Orientation from 'react-native-orientation'
-import { AdMobInterstitial } from 'react-native-admob'
 import Immutable from 'seamless-immutable'
 // import { testDeviceId } from '../../constants'
 
@@ -17,24 +16,11 @@ const defaultState = Immutable({
   orientation: 'PORTRAIT',  // or LANDSCAPE
 })
 
-// AdMobInterstitial.setTestDeviceID('EMULATOR')
-// AdMobInterstitial.setTestDeviceID(testDeviceId)
-const requestInterstitial = () => {
-  AdMobInterstitial.requestAd((error) => {
-    if (error) {
-      console.log('AdMobInterstitial.requestAd: ', error)
-      return
-    }
-    AdMobInterstitial.showAd(err => err && console.log(err))
-  })
-}
-
-Orientation.lockToPortrait()
 const lockOrientationForScene = (newScene) => {
   if (newScene === 'video') {
     Orientation.unlockAllOrientations()
   } else {
-    Orientation.lockToPortrait()
+    // Orientation.lockToPortrait()
   }
 }
 
@@ -58,20 +44,8 @@ const reducer = (state = defaultState, action) => {
       // if app was launched with an alarmId => show the video screen and autoplay video
       const { alarmId, connectionInfo, wifiOnly, volume } = action.payload
       if (typeof alarmId !== 'undefined') {
-        // if settings say play even if not on wifi
-        // or we are connected to Wifi => play video
-        if (!wifiOnly || connectionInfo === 'WIFI') {
-          lockOrientationForScene('video')
-          return state.merge({
-            activeScene: 'video',
-            video: {
-              reload: true,
-              autoplay: true,
-            },
-          }, { deep: true })
-        }
         // otherwise (no WiFi and settings say only when WiFi) play Sound
-        NativeModules.SoundManager.setMusicVolume(volume)
+        // NativeModules.SoundManager.setMusicVolume(volume)
         return playAlarmSound(state)
       }
       return state
@@ -103,7 +77,6 @@ const reducer = (state = defaultState, action) => {
       const { freeVersion } = action.payload
       stopAlarmSound()
       lockOrientationForScene('alarm')
-      if (freeVersion) requestInterstitial()
       return state.merge({
         activeScene: 'alarm',
         ringtoneModal: {
